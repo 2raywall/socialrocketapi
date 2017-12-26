@@ -1,0 +1,22 @@
+{
+    "name": "2raywall/socialrocket",
+    "description": "Conect to Social Rocket Api,",
+    "license": "MIT",
+    "keywords": ["2raywall","social","rocket","api"],
+    "authors": [
+        {
+            "name": "2raywall Inc",
+            "email": "admin@2raywall.com",
+            "homepage": "http://2raywall.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "~5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SocialRocket\\": "src"
+        }
+    }
+}

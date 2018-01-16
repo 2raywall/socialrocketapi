@@ -95,11 +95,14 @@ class Response
      */
     public function getData($key = null)
     {
-        if(is_null($key)) {
+        if(is_null($key))
+        {
             return $this->data;
         }
 
-        if(isset($this->data[$key])){
+
+        if(isset($this->data[$key]))
+        {
             return $this->data[$key];
         }
 

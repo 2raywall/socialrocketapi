@@ -30,7 +30,7 @@ class SocialRocket
      */
     private $arrayParams = [
         "images",
-        "user_keys",
+        "users_slug",
         "sites",
     ];
 
@@ -72,6 +72,44 @@ class SocialRocket
     {
         $this->requestHandler->setApiKey($apiKey);
     }
+
+
+    /**
+     *Prepare data to post
+     *
+     * @param $parameters  users to except to post
+     * @return SocialRocket
+     */
+    public function except($parameters)
+    {
+        $this->params(['behavior'=>'except']);
+        return $this->params(['users_slug'=>$parameters]);
+    }
+
+
+    /**
+     * Prepare data to post
+     *
+     * @param $parameters users to only post
+     * @return SocialRocket
+     */
+    public function only($parameters)
+    {
+        $this->params(['behavior'=>'only']);
+        return $this->params(['users_slug'=>$parameters]);
+    }
+
+
+    /**
+     * Prepare data to post, post all users
+     *
+     * @return SocialRocket
+     */
+    public function all()
+    {
+        return $this->params(['behavior'=>'all']);
+    }
+
 
     /**
      * Function to call dinamically the methods in the class,
@@ -134,12 +172,17 @@ class SocialRocket
     /**
      * End point to send post
      *
+     * @param string $appSlug
      * @param array $params
-     *
      * @return Response
      */
-    public function post($params = [])
+    public function post($appSlug = null, $params = [])
     {
+        if($appSlug)
+        {
+            return $this->sendRequest("apps/{$appSlug}/post","POST",$params);
+        }
+
         return $this->sendRequest("apps/post","POST",$params);
     }
 
@@ -153,7 +196,7 @@ class SocialRocket
      */
     public function createUser($params = [])
     {
-        return $this->sendRequest("apps/social-users","POST",$params);
+        return $this->sendRequest("users","POST",$params);
     }
 
 
@@ -240,7 +283,7 @@ class SocialRocket
     public function getAppProfile($appKey)
     {
         $this->resetParams();
-        return $this->sendRequest("apps/".$appKey."/profiles","GET");
+        return $this->sendRequest("apps/{$appKey}/profiles","GET");
     }
 
 }

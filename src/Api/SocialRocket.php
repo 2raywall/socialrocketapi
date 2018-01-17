@@ -32,6 +32,7 @@ class SocialRocket
         "images",
         "users_slug",
         "sites",
+        "emails",
     ];
 
     /**
@@ -188,15 +189,15 @@ class SocialRocket
 
 
     /**
-     * End point to create a new User
+     * End point to invite Users
      *
      * @param array $params
      *
      * @return Response
      */
-    public function createUser($params = [])
+    public function inviteUsers($appKey, $params = [])
     {
-        return $this->sendRequest("users","POST",$params);
+        return $this->sendRequest("apps/{$appKey}/invite-users","POST",$params);
     }
 
 
@@ -222,19 +223,6 @@ class SocialRocket
     {
         $this->resetParams();
         return $this->sendRequest("apps/users","POST");
-    }
-
-
-    /**
-     *  End point to create a new App
-     *
-     * @param array $params
-     *
-     * @return Response
-     */
-    public function createApp($params = [])
-    {
-        return $this->sendRequest("apps","POST", $params);
     }
 
 
